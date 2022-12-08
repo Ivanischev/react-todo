@@ -1,14 +1,26 @@
 import React from 'react';
 import {PlusOutlined} from "@ant-design/icons"
 
-const Form = () => {
+const Form = ({inputText, setInputText, todos, setTodos }) => {
+
+    const inputTextHandler = (e) => {
+        setInputText(e.target.value)
+    }
+    const submitHandler = (e) => {
+        e.preventDefault();
+        setTodos([
+            ...todos, {text: inputText, id: Math.random() * 1000}
+        ])
+        setInputText("");
+    }
+
     return (
         <form>
-            <h3>Form</h3>
-            <input type="text" className='todo-input'/>
-            <button className='todo-button' type='submit'>
+            <input value={inputText} type="text"  className='todo-input' onChange={inputTextHandler}/>
+            <button type='submit' className='todo-button' onClick={submitHandler}>
                 <PlusOutlined />
             </button>
+            <p></p>
             <div className='select'>
                 <select name="todos" className='filter-todo'>
                     <option value="all">All</option>
