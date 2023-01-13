@@ -1,20 +1,25 @@
-import React from "react";
-import {CheckOutlined, DeleteOutlined} from "@ant-design/icons"
+import React from 'react'
+import { PropTypes } from 'prop-types'
+import { CheckOutlined, DeleteOutlined } from '@ant-design/icons'
 
-const Todo = ({text, todo, setTodos, todos }) => {
-
-
-    const RemoveTodoHandlerClick = () => {
-        setTodos(todos.filter((el) => el.id !== todo.id ))
-    }
-
-    return(
-        <div className="todo">
-            <li className="todo-item">{text}</li>
-            <button className="complete-btn"><CheckOutlined /></button>
-            <button className="trash-btn" onClick={RemoveTodoHandlerClick}><DeleteOutlined /></button>
-        </div>
-    )
+const Todo = ({ text, todo, removeTodoHandlerClick }) => {
+  return (
+    <div className="todo">
+      <li className="todo-item">{text}</li>
+      <button className="complete-btn">
+        <CheckOutlined />
+      </button>
+      <button className="trash-btn" onClick={() => removeTodoHandlerClick(todo.id)}>
+        <DeleteOutlined />
+      </button>
+    </div>
+  )
 }
 
-export default Todo;
+Todo.propTypes = {
+  text: PropTypes.string,
+  todo: PropTypes.object,
+  removeTodoHandlerClick: PropTypes.func,
+}
+
+export default Todo

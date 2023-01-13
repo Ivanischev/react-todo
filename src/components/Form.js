@@ -1,35 +1,41 @@
-import React from 'react';
-import {PlusOutlined} from "@ant-design/icons"
+import React from 'react'
+import { useState } from 'react'
+import { PropTypes } from 'prop-types'
+import { PlusOutlined } from '@ant-design/icons'
 
-const Form = ({inputText, setInputText, todos, setTodos }) => {
+const Form = ({ addTodoHandler }) => {
+  const [inputText, setInputText] = useState('')
 
-    const inputTextHandler = (e) => {
-        setInputText(e.target.value)
-    }
-    const submitHandler = (e) => {
-        e.preventDefault();
-        setTodos([
-            ...todos, {text: inputText, id: Math.random() * 1000}
-        ])
-        setInputText("");
-    }
+  const inputTextHandler = (e) => {
+    setInputText(e.target.value)
+  }
 
-    return (
-        <form>
-            <input value={inputText} type="text"  className='todo-input' onChange={inputTextHandler}/>
-            <button type='submit' className='todo-button' onClick={submitHandler}>
-                <PlusOutlined />
-            </button>
-            <p></p>
-            <div className='select'>
-                <select name="todos" className='filter-todo'>
-                    <option value="all">All</option>
-                    <option value="completed">Completed</option>
-                    <option value="uncompleted">Uncompleted</option>
-                </select>
-            </div>
-        </form>
-    );
+  const submitFormHandler = (e) => {
+    e.preventDefault()
+    addTodoHandler({ text: inputText, id: Math.random() * 1000 })
+    setInputText('')
+  }
+
+  return (
+    <form>
+      <input value={inputText} type="text" className="todo-input" onChange={inputTextHandler} />
+      <button type="submit" className="todo-button" onClick={(e) => submitFormHandler(e)}>
+        <PlusOutlined />
+      </button>
+      <p></p>
+      <div className="select">
+        <select name="todos" className="filter-todo">
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="uncompleted">Uncompleted</option>
+        </select>
+      </div>
+    </form>
+  )
 }
 
-export default Form;
+Form.propTypes = {
+  addTodoHandler: PropTypes.func,
+}
+
+export default Form

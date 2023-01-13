@@ -1,16 +1,22 @@
 import React from 'react'
+import { PropTypes } from 'prop-types'
 import Todo from './Todo'
 
-const TodoList = ({todos, setTodos}) => {
-    return (
-        <div className='todo-container'>
-            <ul className='todo-list'>
-                {todos.map(todo => (
-                    <Todo text={todo.text} todos={todos} todo={todo} setTodos={setTodos} key={todo.id} />
-                ))}
-            </ul>
-        </div>
-    )
+const TodoList = ({ removeTodoHandlerClick, todos }) => {
+  return (
+    <div className="todo-container">
+      <ul className="todo-list">
+        {todos.map((todo) => (
+          <Todo text={todo.text} todo={todo} key={todo.id} removeTodoHandlerClick={removeTodoHandlerClick} />
+        ))}
+      </ul>
+    </div>
+  )
 }
 
-export default TodoList;  
+TodoList.propTypes = {
+  todos: PropTypes.array,
+  removeTodoHandlerClick: PropTypes.func,
+}
+
+export default TodoList
