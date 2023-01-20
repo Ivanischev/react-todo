@@ -1,14 +1,35 @@
 .App {
   text-align: center;
-}
-
-.app-body {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.app-body {
+  padding-top: 100px;
+}
+
+.form {
+  display: flex;
+  align-items: flex-start;
+}
+
+.todo-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.todo {
+  display: flex;
+  justify-content: space-between;
+  min-width: 250px;
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.8;
 }
